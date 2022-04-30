@@ -22,24 +22,16 @@
             <RowDefinition></RowDefinition>
             <RowDefinition Height="12"></RowDefinition>
         </Grid.RowDefinitions>
-        <ListView Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" ItemsSource="{Binding Cars}">
+        <ListView x:Name="CarsListView" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" ItemsSource="{Binding Cars}" SelectionChanged="CarsListView_SelectionChanged">
             <ListView.View>
-                    <GridView>
+                <GridView>
                     <GridViewColumn Header="manufacturer" DisplayMemberBinding="{Binding Manufacturer}" />
                     <GridViewColumn Header="model" DisplayMemberBinding="{Binding Model}" />
                     <GridViewColumn Header="model date" DisplayMemberBinding="{Binding ModelDate}" />
                 </GridView>
-                </ListView.View>
-            
-                <!--<DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Manufacturer}" />
-                        <TextBlock Text="{Binding Model}" />
-                        <TextBlock Text="{Binding ModelDate}" />
-                    </StackPanel>
-                </DataTemplate>-->
-
+            </ListView.View>
         </ListView>
         <Button x:Name="EndTaskButton" Grid.Column="1"  Grid.Row="1" Content="End Task" HorizontalAlignment="Center"  VerticalAlignment="Center" Click="EndTaskButton_Click"/>
+        <TextBlock Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Text="{Binding SelectedCar.Description}"/>
     </Grid>
 </Window>

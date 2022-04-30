@@ -29,7 +29,6 @@ namespace WPFBasics
         {
             InitializeComponent();
             Model = new MainViewModel();
-            Model.Cars.Add(new CarViewModel(DateTime.Now, "Honda", "Civic"));
             DataContext = Model;
             _cancelAddCarsSource = new CancellationTokenSource();
             _addCarsTask = AddCars(_cancelAddCarsSource.Token);
@@ -40,9 +39,13 @@ namespace WPFBasics
         {
             return Task.Run(() =>
             {
+                int i = 0;
                 while (!token.IsCancellationRequested)
                 {
-                    Dispatcher.BeginInvoke(() => Model.Cars.Add(new CarViewModel(DateTime.Now, "Honda", "Civic")));
+                    CarViewModel car = new CarViewModel(DateTime.Now, "Honda", "Civic");
+                    car.Description = $"this is the long description text for car at index - {i}";
+                    Dispatcher.BeginInvoke(() => Model.Cars.Add(car));
+                    i++;
                     Thread.Sleep(2000);
                 }
             }, token);
@@ -52,6 +55,11 @@ namespace WPFBasics
         private void EndTaskButton_Click(object sender, RoutedEventArgs e)
         {
             _cancelAddCarsSource.Cancel();
+        }
+
+        private void CarsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Model.SelectedCar = (CarViewModel)CarsListView.SelectedItem;
         }
     }
 }

@@ -32,7 +32,19 @@ namespace WPFBasics.ViewModels
             }
         }
 
-        
+        private string? _description;
+        public string? Description
+        {
+            get { return _description; }
+            set
+            {
+                _description = value;
+                OnPropertyChanged(nameof(Description));
+            }
+        }
+
+
+
 
         public CarViewModel(DateTime modelDate)
         {
