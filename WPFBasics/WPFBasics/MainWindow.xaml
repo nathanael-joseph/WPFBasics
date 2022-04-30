@@ -23,15 +23,22 @@
             <RowDefinition Height="12"></RowDefinition>
         </Grid.RowDefinitions>
         <ListView Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" ItemsSource="{Binding Cars}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
+            <ListView.View>
+                    <GridView>
+                    <GridViewColumn Header="manufacturer" DisplayMemberBinding="{Binding Manufacturer}" />
+                    <GridViewColumn Header="model" DisplayMemberBinding="{Binding Model}" />
+                    <GridViewColumn Header="model date" DisplayMemberBinding="{Binding ModelDate}" />
+                </GridView>
+                </ListView.View>
+            
+                <!--<DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding Manufacturer}" />
                         <TextBlock Text="{Binding Model}" />
                         <TextBlock Text="{Binding ModelDate}" />
                     </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
+                </DataTemplate>-->
+
         </ListView>
     </Grid>
 </Window>
