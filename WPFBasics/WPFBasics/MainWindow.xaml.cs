@@ -23,7 +23,7 @@ namespace WPFBasics
     public partial class MainWindow : Window
     {
         private Task _addCarsTask { get; set; }
-        private CancellationToken cancelAddCars;
+        private CancellationTokenSource _cancelAddCarsSource;
         public MainViewModel Model { get; private set; }
         public MainWindow()
         {
@@ -31,8 +31,8 @@ namespace WPFBasics
             Model = new MainViewModel();
             Model.Cars.Add(new CarViewModel(DateTime.Now, "Honda", "Civic"));
             DataContext = Model;
-            cancelAddCars = new CancellationToken();
-            _addCarsTask = AddCars(cancelAddCars);
+            _cancelAddCarsSource = new CancellationTokenSource();
+            _addCarsTask = AddCars(_cancelAddCarsSource.Token);
 
         }
 
@@ -48,6 +48,10 @@ namespace WPFBasics
             }, token);
         }
 
-        
+
+        private void EndTaskButton_Click(object sender, RoutedEventArgs e)
+        {
+            _cancelAddCarsSource.Cancel();
+        }
     }
 }

@@ -40,5 +40,6 @@
                 </DataTemplate>-->
 
         </ListView>
+        <Button x:Name="EndTaskButton" Grid.Column="1"  Grid.Row="1" Content="End Task" HorizontalAlignment="Center"  VerticalAlignment="Center" Click="EndTaskButton_Click"/>
     </Grid>
 </Window>
